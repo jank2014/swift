@@ -291,7 +291,138 @@ let someCreature = Animal(species: "Giraffe")
 if let giraffe = someCreature {
     print("An animal was initialized with a species of \(giraffe.species)")
 }
- 
+let anonymousCreature = Animal(species: "")
+if anonymousCreature == nil {
+    print("The anonymous creature could not be initialized")
+}
+
+print("枚举类型的可失败构造器")
+enum TemperatureUnit {
+    case Kelvin,Celsius,Fahrenheit
+    init?(symbol: Character){
+        switch symbol {
+            case "K":
+            self = .Kelvin
+            case "C":
+            self = .Celsius
+            case "F":
+            self = .Fahrenheit
+        default:
+            return nil
+        }
+    }
+}
+
+//你可以通过给该可失败构造器传递合适的参数来获取这三个枚举成员中相匹配的其中一个枚举成员。当参数的值不能与任意一枚举成员相匹配时,该枚举类型的构建过程失败:
+
+let fahrenheitUnit = TemperatureUnit(symbol: "F")
+if fahrenheitUnit != nil {
+    print("This is a defined temperature unit, so initialization succeeded.")
+}
+let unknownUnit = TemperatureUnit(symbol: "X")
+if unknownUnit == nil {
+    print("This is not a defined temperature unit, so initialization failed.")
+}
+
+print("带原始值的枚举类型的可失败构造器")
+enum TemperatureUnitOne: Character {
+    case Kelvin = "K", Celsius = "C", Fahrenheit = "F"
+}
+
+let fahrenheitUnitOne = TemperatureUnitOne(rawValue: "F")
+if fahrenheitUnit != nil {
+    print("This is a defined temperature unit, so initialization succeeded.")
+}
+
+let unknownUnitOne = TemperatureUnitOne(rawValue: "X")
+if unknownUnit == nil {
+    print("This is not a defined temperature unit, so initialization failed.")
+}
+
+print("类的可失败构造器")
+class Product {
+    let name: String!
+    init?(name: String) {
+        self.name = name
+        if name.isEmpty { return nil }
+    }
+}
+if let bowTie = Product(name: "bow tie") {
+    // 不需要检查 bowTie.name == nil
+    print("The product's name is \(bowTie.name)")
+}
+
+print("构造失败的传递")
+print("可失败构造器允许在同一类,结构体和枚举中横向代理其他的可失败构造器。类似的,子类的可失败构造器也能向上代理基类的可失败构造器。")
+class CartItem: Product {
+    let quantity: Int!
+    init?(name: String, quantity: Int) {
+        self.quantity = quantity
+        super.init(name: name)
+        if quantity < 1 { return nil }
+    }
+}
+if let twoSocks = CartItem(name: "sock", quantity: 2) {
+    print("Item: \(twoSocks.name), quantity: \(twoSocks.quantity)")
+}
+
+
+if let zeroShirts = CartItem(name: "shirt", quantity: 0) {
+    print("Item: \(zeroShirts.name), quantity: \(zeroShirts.quantity)")
+} else {
+    print("Unable to initialize zero shirts")
+}
+
+if let oneUnnamed = CartItem(name: "", quantity: 1) {
+    print("Item: \(oneUnnamed.name), quantity: \(oneUnnamed.quantity)")
+} else {
+    print("Unable to initialize one unnamed product")
+}
+
+print("重写一个可失败构造器")
+class Document {
+    var name: String?
+    // 该构造器构建了一个name属性值为nil的document对象
+    init() {}
+    // 该构造器构建了一个name属性值为非空字符串的document对象
+    init?(name: String) {
+        if name.isEmpty { return nil }
+        self.name = name
+    }
+}
+
+class AutomaticallyNamedDocument: Document {
+    override init() {
+        super.init()
+        self.name = "[Untitled]"
+    }
+    override init(name: String) {
+        super.init()
+        if name.isEmpty {
+            self.name = "[Untitled]"
+        } else {
+            self.name = name
+        }
+    }
+}
+class UntitledDocument: Document {
+    override init() {
+        super.init(name: "[Untitled]")!
+    }
+}
+
+print("可失败构造器 init!")
+
+/*
+
+    通常来说我们通过在 init 关键字后添加问号的方式( init? )来定义一个可失败构造器,但你也可以使用通过在 init 
+    后面添加惊叹号的方式来定义一个可失败构造器 (init!) ,该可失败构造器将会构建一个特定类型的隐式解析可选类型的对象。
+    你可以在 init? 构造器中代理调用 init! 构造器,反之亦然。 你也可以用 init? 重写 init! ,反之亦然。
+    你还可以用 init 代理调用 init! ,但这会触发一个断言: init! 构造器是否会触发构造失败?
+
+*/
+
+
 /*************************************** 必要构造器 *****************************************/
 
 //在类的构造器前添加 required 修饰符表明所有该类的子类都必须实现该构造器:
@@ -309,3 +440,39 @@ class SomeSubclass: SomeClass {
     }
 }
 /*************************************** 通过闭包和函数来设置属性的默认值 *********************************/
+//如果某个存储型属性的默认值需要特别的定制或准备,你就可以使用闭包或全局函数来为其属性提供定制的默认值。
+//每当某个属性所属的新类型实例创建时,对应的闭包或函数会被调用,而它们的返回值会当做默认值赋值给这个属性。
+
+/*
+class SomeClassNew {
+    let someProperty: SomeType = {
+    }
+    // 在这个闭包中给 someProperty 创建一个默认值 // someValue 必须和 SomeType 类型相同
+    return someValue
+}()
+*/
+
+print("注意闭包结尾的大括号后面接了一对空的小括号。这是用来告诉 Swift 需要立刻执行此闭包。如果你忽略了这对 括号,相当于是将闭包本身作为值赋值给了属性,而不是将闭包的返回值赋值给属性。")
+
+
+struct Checkerboard {
+    let boardColors: [Bool] = {
+        var temporaryBoard = [Bool]()
+        var isBlack = false
+        for i in 1...10 {
+            for j in 1...10 {
+                temporaryBoard.append(isBlack)
+                isBlack = !isBlack
+            }
+            isBlack = !isBlack
+        }
+        return temporaryBoard
+    }()
+    func squareIsBlackAtRow(row: Int, column: Int) -> Bool {
+        return boardColors[(row * 10) + column]
+    }
+}
+let board = Checkerboard()
+print(board.squareIsBlackAtRow(0, column: 1)) // 输出 "true"
+print(board.squareIsBlackAtRow(9, column: 9)) // 输出 "false"
+
