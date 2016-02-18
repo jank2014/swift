@@ -76,26 +76,26 @@ print("Game over!")
 print("• repeat-while循环,每次在循环结束时计算条件是否符合。")
 /*
 
-repeat {
-    statements
-} while condition
+    repeat {
+        statements
+    } while condition
 
 */
 /*
-let finalSquare1 = 25
-var board1 = [Int](count: finalSquare + 1, repeatedValue: 0)
-board[03] = +08; board[06] = +11; board[09] = +09; board[10] = +02
-board[14] = -10; board[19] = -11; board[22] = -02; board[24] = -08
-var square1 = 0
-var diceRoll1 = 0
+    let finalSquare1 = 25
+    var board1 = [Int](count: finalSquare + 1, repeatedValue: 0)
+    board[03] = +08; board[06] = +11; board[09] = +09; board[10] = +02
+    board[14] = -10; board[19] = -11; board[22] = -02; board[24] = -08
+    var square1 = 0
+    var diceRoll1 = 0
 
-repeat {
-//    square1 += board1[square1]
-if ++diceRoll1 == 7 {
-        square1 += diceRoll1
-    }
-} while square1 < finalSquare1
-print("Game over!")
+    repeat {
+    //    square1 += board1[square1]
+    if ++diceRoll1 == 7 {
+            square1 += diceRoll1
+        }
+    } while square1 < finalSquare1
+    print("Game over!")
 
 */
 /************************************ 条件语句 if **************************************/
@@ -252,9 +252,9 @@ print("Break break 语句会立刻结束整个控制流的执行。当你想要�
 
 /*
 
-循环语句中的 break
-当在一个循环体中使用 break 时,会立刻中断该循环体的执行,然后跳转到表示循环体结束的大括号( } )后的第 一行代码。
-不会再有本次循环迭代的代码被执行,也不会再有下次的循环迭代产生。
+    循环语句中的 break
+    当在一个循环体中使用 break 时,会立刻中断该循环体的执行,然后跳转到表示循环体结束的大括号( } )后的第 一行代码。
+    不会再有本次循环迭代的代码被执行,也不会再有下次的循环迭代产生。
 
 */
 let numberSymbol: Character = "三"
@@ -294,20 +294,21 @@ default:
 print("带标签的语句")
 /*
 
-gameLoop: while square != finalSquare {
-if ++diceRoll == 7 { diceRoll = 1 }
-switch square + diceRoll {
-case finalSquare:
-// 到达最后一个方块,游戏结束
-break gameLoop
-case let newSquare where newSquare > finalSquare:
-// 超出最后一个方块,再掷一次骰子
-continue gameLoop
-default:
-// 本次移动有效
-square += diceRoll square += board[square]
-} }
-print("Game over!")
+    gameLoop: while square != finalSquare {
+    if ++diceRoll == 7 { diceRoll = 1 }
+    switch square + diceRoll {
+    case finalSquare:
+    // 到达最后一个方块,游戏结束
+    break gameLoop
+    case let newSquare where newSquare > finalSquare:
+    // 超出最后一个方块,再掷一次骰子
+    continue gameLoop
+    default:
+    // 本次移动有效
+    square += diceRoll square += board[square]
+    } 
+    }
+    print("Game over!")
 
 */
 
@@ -317,8 +318,8 @@ print("提前退出")
 
 /*
 
-像 if 语句一样, guard 的执行取决于一个表达式的布尔值。我们可以使用 guard 语句来要求条件必须为真 时,以执行 guard 语句后的代码。
-不同于 if 语句,一个 guard 语句总是有一个 else 分句,如果条件不为真则执 行 else 分句中的代码。
+    像 if 语句一样, guard 的执行取决于一个表达式的布尔值。我们可以使用 guard 语句来要求条件必须为真 时,以执行 guard 语句后的代码。
+    不同于 if 语句,一个 guard 语句总是有一个 else 分句,如果条件不为真则执 行 else 分句中的代码。
 
 */
 func greet(person: [String: String]) {
@@ -345,11 +346,11 @@ print("检测 API 可用性")
 
 /*
 
-if #available(iOS 9, OSX 10.10, *) {
-// 在 iOS 使用 iOS 9 的 API, 在 OS X 使用 OS X v10.10 的 API
-} else {
-// 使用先前版本的 iOS 和 OS X 的 API
-}
+    if #available(iOS 9, OSX 10.10, *) {
+    // 在 iOS 使用 iOS 9 的 API, 在 OS X 使用 OS X v10.10 的 API
+    } else {
+    // 使用先前版本的 iOS 和 OS X 的 API
+    }
 
 */
 //以上可用性条件指定了在 iOS 系统上, if 段的代码仅会在 iOS 9 及更高版本的系统上执行;在 OS X,仅会在 OS X v10.10 及更高版本的系统上执行。
@@ -359,14 +360,12 @@ print("最后一个参数, * ,是必须写的,用于处理未来潜在的平台�
 
 /*
 
-if #available(platform name version, ..., *) {
-    statements to execute if the APIs are available
-} else {
-    fallback statements to execute if the APIs are unavailable
-}
-
+    if #available(platform name version, ..., *) {
+        statements to execute if the APIs are available
+    } else {
+        fallback statements to execute if the APIs are unavailable
+    }
 
 */
-
 
 /************************************ for循环 **************************************/
