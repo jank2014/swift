@@ -237,3 +237,4 @@ if let actualNumber = Int(possibleNumber) {
 let jankzAge = 3
 assert(jankzAge >= 0, "A person's age can't be less than zero")
 
+//断言
