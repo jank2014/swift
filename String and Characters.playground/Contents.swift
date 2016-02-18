@@ -9,3 +9,10 @@ var anotherEmptyString = String()   //初始化方法
 if emptyString.isEmpty {
     print("The string is empty!")
 }
+
+var variableString = "Horse"
+variableString += " and carriage"
+// variableString 现在为 "Horse and carriage"
+let constantString = "Highlander"
+//constantString += " and another Highlander"
+// 这会报告一个编译错误 (compile-time error) - 常量字符串不可以被修改。
