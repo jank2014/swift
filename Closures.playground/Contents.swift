@@ -20,9 +20,6 @@ print("闭包是自包含的函数代码块,可以在代码中被传递和使用
 
 */
 
-
-
-
 /******************************** 闭包表达式     *********************************/
 print("闭包表达式")
 let names = ["Chris", "Alex", "Ewa", "Danreila"]
@@ -33,8 +30,6 @@ func backwards(s1: String, s2:String) -> Bool {
 var reversed = names.sort()
 var reversedNew = names.sort(backwards) //逆序输出
 print("对于字符串中的字符来说 ‘大于’ 表示按照字母顺序较晚出现 B>A ")
-
-
 
 //闭包表达式语法
 print("闭包表达式语法")
