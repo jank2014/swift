@@ -17,9 +17,6 @@ func sayHello(personName: String) ->String {
 sayHello("jankz")
 print(sayHello("PINCK"))
 
-
-
-
 /******************************** 函数参数与返回值  *************************************/
 
 //无参函数
@@ -79,9 +76,6 @@ print(y)
 if let bounds = minMax([8, -6, 2, 109, 3, 71]) {
     print("MIN is \(bounds.min) and MAX is \(bounds.max)")
 }
-
-
-
 
 /******************************** 函数参数名称     *************************************/
 
@@ -196,7 +190,6 @@ func chooseStepFunction(backwards: Bool) -> (Int) -> Int {
 
 
 /******************************** 嵌套函数        *************************************/
-
 
 print("也可以把函数定义在 别的函数体中,称作嵌套函数(nested functions)。")
 
