@@ -224,7 +224,6 @@ for airportName in airports.values {
     print("Airport Name: \(airportName)")
 }
 
-
 //数组构造字典 
 let airportCode = [String](airports.keys)
 let airportName = [String](airports.values)
