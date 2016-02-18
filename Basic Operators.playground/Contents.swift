@@ -137,7 +137,6 @@ if (enteredDoorGode && passedRetinaScan) || hasDoorKey || knowsOverridePassword 
 }else{
     print("ACCESS DEFINE!")
 }
-//这里注意括号与缩进
 
 
 
